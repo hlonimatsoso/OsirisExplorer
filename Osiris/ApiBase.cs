@@ -12,14 +12,20 @@ namespace Osiris
 {
     public abstract class ApiBase : IApiBase
     {
-       
+
         public ApiBase(IHttpClientFactory factory, IOptions<DogApiSettings> settings)
         {
             this.Client = factory.CreateClient("DogsAPI");
             this.DbSettings = settings;
         }
 
-        public HttpClient Client { get ; set ; }
+        public ApiBase(HttpClient client, IOptions<DogApiSettings> settings)
+        {
+            this.Client = client;
+            this.DbSettings = settings;
+        }
+
+        public HttpClient Client { get; set; }
 
         public IOptions<DogApiSettings> DbSettings { get; set; }
 
@@ -36,9 +42,17 @@ namespace Osiris
             ApiResult<T> r = new ApiResult<T>();
             r.IsValid = httpResponse.IsSuccessStatusCode;
             r.HttpStatusCode = httpResponse.StatusCode;
-            var dez = JsonConvert.DeserializeObject<T>(content);
+            try
+            {
+                r.Results = JsonConvert.DeserializeObject<T>(content);
+            }
+            catch (Exception)
+            {
 
-            r.Results = dez;
+                var test = JsonConvert.DeserializeObject<ApiResult<T>>(content);
+                r.Results = test.Results;
+            }
+
             return r;
         }
 

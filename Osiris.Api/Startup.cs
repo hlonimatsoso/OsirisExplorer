@@ -36,8 +36,16 @@ namespace Osiris.Api
                 client.BaseAddress = new Uri(Configuration.GetSection("DogApi:baseUrl").Value);
                 client.DefaultRequestHeaders.Add("x-api-key", Configuration.GetSection("DogApi:key").Value);
             });
-            
-            //services.AddTransient<IApiBase, ApiBase>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "BlazorPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:63315", "https://localhost:44336")
+                                .WithMethods("GET");
+                    });
+            });
 
             services.AddTransient<IDogService, DogService>();
 
@@ -62,6 +70,7 @@ namespace Osiris.Api
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseCors("BlazorPolicy");
             app.UseHttpsRedirection();
 
             app.UseRouting();

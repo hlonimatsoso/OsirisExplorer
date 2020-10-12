@@ -1,5 +1,6 @@
 @page "/fetchdata"
 @inject HttpClient Http
+@inject IDogsApiClient client
 
 <h1>Weather forecast</h1>
 
@@ -32,14 +33,45 @@ else
             }
         </tbody>
     </table>
+
+
+
+}
+
+@if (Dogs == null)
+{
+    <p>Dogs Loading...</p>
+}
+else
+{
+
+    <ul>
+        @foreach (var item in Dogs)
+        {
+            <li>
+                @item.name
+            </li>
+        }
+    </ul>
 }
 
 @code {
     private WeatherForecast[] forecasts;
 
+    private List<Breed> Dogs;
+
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        //forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        var response = await client.GetAllBreeds();
+        if (response.IsValid)
+        {
+            Dogs = response.Results.ToList();
+        }
+        else
+        {
+
+        }
     }
 
     public class WeatherForecast

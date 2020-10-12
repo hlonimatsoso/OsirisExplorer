@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Osiris.Interfaces;
+using Osiris.BlazorApp.Clients;
 
 namespace Osiris.BlazorApp
 {
@@ -17,7 +19,9 @@ namespace Osiris.BlazorApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:62222/") });
+
+            builder.Services.AddScoped<IDogsApiClient, DogsApiClient>();
 
             await builder.Build().RunAsync();
         }

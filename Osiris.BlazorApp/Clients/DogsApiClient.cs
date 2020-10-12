@@ -1,17 +1,23 @@
-﻿using Osiris.DogApi;
+﻿using Microsoft.Extensions.Options;
+using Osiris.DogApi;
 using Osiris.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Osiris.BlazorApp.Clients
 {
-    public class DogsApiClient : IDogsApiClient
+    public class DogsApiClient : ApiBase, IDogsApiClient
     {
-        public Task<ApiResult<List<Breed>>> GetAllBreeds()
+
+        public DogsApiClient(HttpClient client, IOptions<DogApiSettings> settings) : base(client, settings)
+        { }
+
+        public async Task<ApiResult<List<Breed>>> GetAllBreeds()
         {
-            throw new NotImplementedException();
+            return await Get<List<Breed>>("api/dogs/");
         }
 
         public Task<ApiResult<List<Breed>>> GetBreedByName(string breedName)
