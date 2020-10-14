@@ -49,6 +49,24 @@ namespace Osiris.Api.DogApi
              
         }
 
+
+
+        public async Task<ApiResult<List<Breed>>> GetBreedById(string breedId)
+        {
+            string url = $"{DbSettings.Value.urls.breeds}";
+
+            if (!string.IsNullOrEmpty(breedId))
+                url = $"{url}/search?breed_ids={breedId}";
+
+            ApiResult<List<Breed>> cacheEntry;
+
+            if (Cache.TryGetCache(url, out cacheEntry))
+                cacheEntry.IsCachedData = true;
+            else
+                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, DbSettings.Value.cache_stratergies.images);
+
+            return cacheEntry;
+        }
         public async Task<ApiResult<List<Breed>>> GetBreedByName(string breedName)
         {
             string url = $"{DbSettings.Value.urls.breeds}";
@@ -107,6 +125,7 @@ namespace Osiris.Api.DogApi
                 temp = await GetDogByBreedId(int.Parse(id));
                 result.IsValid = temp.IsValid;
                 result.Results.AddRange(temp.Results);
+                result.IsCachedData = temp.IsCachedData;
             }
 
             return result;

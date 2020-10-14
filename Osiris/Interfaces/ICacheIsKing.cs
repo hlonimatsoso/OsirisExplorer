@@ -10,6 +10,5 @@ namespace Osiris.Interfaces
         
         T SetCache<T>(string key, T @object, int cacheDurationInSeconds);
 
-        bool RunCacheWarmer();
     }
 }

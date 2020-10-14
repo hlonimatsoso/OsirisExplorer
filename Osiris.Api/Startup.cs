@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Osiris.Api.CacheWarmer;
+using Osiris.Api.CacheWarmers;
 using Osiris.Api.DogApi;
 using Osiris.DogApi;
 using Osiris.Interfaces;
@@ -53,7 +55,13 @@ namespace Osiris.Api
 
             services.AddTransient<IDogService, DogService>();
 
-            services.AddTransient<ICacheIsKing, OsirisCache>();
+            services.AddTransient<ICacheIsKing, OsirisCache>(); 
+
+            services.AddTransient<IDogsApiCacheWarmer, DogsApiCacheWarmer>();
+
+            services.AddTransient<IOsirisCacheWarmer, OsirisCacheWarmer>();
+
+            
 
             services.AddSwaggerGen();
 
@@ -89,6 +97,8 @@ namespace Osiris.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.EvaluateCacheSettings();
         }
     }
 }

@@ -18,14 +18,9 @@ namespace Osiris
             Cache = cache;
         }
 
-        public bool RunCacheWarmer()
-        {
-            throw new NotImplementedException();
-        }
 
         public T SetCache<T>(string key, T @object, int cacheDurationInSeconds)
         {
-            // Set cache options.
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromSeconds(cacheDurationInSeconds));
 
