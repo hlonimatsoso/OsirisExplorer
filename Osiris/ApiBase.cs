@@ -12,6 +12,8 @@ namespace Osiris
 {
     public abstract class ApiBase : IApiBase
     {
+        public string CurrentlyBusyWith { get; set; }
+
 
         public ApiBase(IHttpClientFactory factory, IOptions<DogApiSettings> settings)
         {
@@ -31,7 +33,7 @@ namespace Osiris
 
         public async Task<ApiResult<T>> Get<T>(string url)
         {
-            var httpResponse = await Client.GetAsync(url);
+            var httpResponse = await Client.GetAsync($"{DbSettings.Value.baseUrl}/{url}");
 
             if (!httpResponse.IsSuccessStatusCode)
             {

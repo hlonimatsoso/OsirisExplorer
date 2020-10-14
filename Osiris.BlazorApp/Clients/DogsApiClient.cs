@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Osiris.DogApi;
 using Osiris.Interfaces;
 using System;
@@ -15,9 +16,32 @@ namespace Osiris.BlazorApp.Clients
         public DogsApiClient(HttpClient client, IOptions<DogApiSettings> settings) : base(client, settings)
         { }
 
+        public List<Breed> Breeds { get; set; }
+        public List<Image> Dogs { get; set; }
+        public IMemoryCache Cache { get; set ; }
+
         public async Task<ApiResult<List<Breed>>> GetAllBreeds()
         {
-            return await Get<List<Breed>>("api/dogs/");
+            CurrentlyBusyWith = $"GetAllBreeds()";
+
+            var temp = await Get<List<Breed>>("api/dogs/");
+            Breeds = temp.Results;
+            await GetBreedImagesAsync();
+            CurrentlyBusyWith = "GetAllBreeds & GetBreedImagesAsync done";
+            return temp;
+        }
+
+        private async Task GetBreedImagesAsync()
+        {
+            CurrentlyBusyWith = $"GetBreedImagesAsync()";
+
+            var list = Breeds.Select(x => x.id).ToList();
+            var temp = await SearchAllImages(string.Join(',', list));
+            if (temp.IsValid)
+            {
+                Dogs = temp.Results;
+
+            }
         }
 
         public Task<ApiResult<List<Breed>>> GetBreedByName(string breedName)
@@ -33,6 +57,12 @@ namespace Osiris.BlazorApp.Clients
         public Task<ApiResult<List<Image>>> GetRandomDog()
         {
             throw new NotImplementedException();
+        }
+
+        public Task<ApiResult<List<Image>>> SearchAllImages(string list)
+        {
+            string url = $"api/dogs/images/search/{list}";
+            return Get<List<Image>>(url);
         }
     }
 }

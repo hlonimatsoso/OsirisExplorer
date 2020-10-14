@@ -1,0 +1,71 @@
+﻿@inherits GlossoryBase
+@page "/glossory"
+
+
+<h3>Glossory (@BreedCount dogs cataloged)</h3> <span><i>busy with... @(((ApiBase)Client).CurrentlyBusyWith)</i></span>
+
+@if (string.IsNullOrEmpty(ErrorMessage))
+{
+    @if (Breeds == null)
+    {
+        <p>
+            <i>
+                Loading glossory breeds ...
+            </i>
+        </p>
+    }
+    else
+    {
+        <h4>Welcome</h4>
+
+        <MatTable Items="@Breeds" class="mat-elevation-z5">
+            <MatTableHeader>
+                <th>Selfie</th>
+                <th>Info</th>
+            </MatTableHeader>
+            <MatTableRow>
+                <td>
+                    @if (Client.Dogs != null)
+                    {
+                        Image img = Client.Dogs.FirstOrDefault(x => x.id.Equals(context.id));
+                        
+                        <img height="40px" width="60px" src="@img.url"/>
+                    }
+                    else
+                    {
+
+                    }
+
+                </td>
+                <td>
+                    <div class="mat-layout-grid">
+                        <div class="mat-layout-grid-inner">
+                            <div class="mat-layout-grid-cell">
+                                <div class="mat-layout-grid-inner">
+                                    <div class="mat-layout-grid-cell">Name: @context.name</div>
+                                    <div class="mat-layout-grid-cell">Breed group: @context.breed_group</div>
+                                </div>
+                            </div>
+                            <div class="mat-layout-grid-cell">
+                                <div class="mat-layout-grid-inner">
+                                    <div class="mat-layout-grid-cell">Country Code: @context.country_code</div>
+                                    <div class="mat-layout-grid-cell">Bred For: @context.bred_for</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </MatTableRow>
+        </MatTable>
+    }
+
+
+}
+else
+{
+    <h3>ERROR</h3>
+    <p>
+        @ErrorMessage
+    </p>
+}
+

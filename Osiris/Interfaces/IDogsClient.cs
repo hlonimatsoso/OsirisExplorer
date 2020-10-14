@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Osiris.Interfaces
 {
-    public interface IDogService
+    public interface IDogsClient
     {
-        ICacheIsKing Cache { get; set; }
         Task<ApiResult<List<Breed>>> GetAllBreeds();
 
         Task<ApiResult<List<Breed>>> GetBreedByName(string breedName);

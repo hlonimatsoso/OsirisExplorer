@@ -1,0 +1,37 @@
+﻿@inherits PlaygroundBase
+<h3>Playground</h3>
+
+@if (Breeds == null)
+{
+    <span><i>Loading Breeds</i></span>
+}
+else
+{
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            @foreach (Breed breed in Breeds)
+            {
+                <div class="mat-layout-grid-cell">
+                    <MatRipple class="breed_ripple">
+                        Click here
+                    </MatRipple>
+                </div>
+
+            }
+        </div>
+    </div>
+
+}
+
+
+<style>
+    .breed_ripple {
+        width: 75px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: inline-flex;
+    }
+</style>
+

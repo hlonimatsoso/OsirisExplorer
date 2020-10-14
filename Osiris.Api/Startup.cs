@@ -42,16 +42,22 @@ namespace Osiris.Api
                 options.AddPolicy(name: "BlazorPolicy",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:63315", "https://localhost:44336")
+                        builder.WithOrigins("http://localhost:63315", "https://localhost:44336", "https://localhost:5001","http://localhost:5000")
                                 .WithMethods("GET");
                     });
             });
 
-            services.AddTransient<IDogService, DogService>();
+            services.AddMemoryCache();
 
             services.Configure<DogApiSettings>(options => Configuration.GetSection("DogApi").Bind(options));
 
+            services.AddTransient<IDogService, DogService>();
+
+            services.AddTransient<ICacheIsKing, OsirisCache>();
+
             services.AddSwaggerGen();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +67,8 @@ namespace Osiris.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            
 
             app.UseSwagger();
 

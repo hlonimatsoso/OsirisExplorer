@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osiris.BlazorApp", "Osiris.BlazorApp\Osiris.BlazorApp.csproj", "{AB3A0D2C-213D-4163-A573-B98C9B4B51CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osiris", "Osiris\Osiris.csproj", "{B0C4C407-F27E-4B0A-B212-C54EB6866218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osiris", "Osiris\Osiris.csproj", "{B0C4C407-F27E-4B0A-B212-C54EB6866218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osiris.Api", "Osiris.Api\Osiris.Api.csproj", "{2BDD7198-5645-45CF-A7A0-97D51B25A8ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osiris.Api", "Osiris.Api\Osiris.Api.csproj", "{2BDD7198-5645-45CF-A7A0-97D51B25A8ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

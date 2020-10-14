@@ -10,19 +10,25 @@ namespace Osiris.DogApi
 
         public string key { get; set; }
 
-        public string queries_breeds { get; set; }
+        public DogApiUrls<string> urls { get; set; }
 
-        public string queries_categories { get; set; }
+        public DogApiCacheStrategies cache_stratergies { get; set; }
 
-        public string queries_images { get; set; }
 
     }
 
-    public class DogApiQueries
+    public class DogApiUrls<T>
     {
 
-        public string breeds { get; set; }
-        public string categories { get; set; }
+        public T breeds { get; set; }
+        public T categories { get; set; }
+        public T images { get; set; }
+
+    }
+
+    public class DogApiCacheStrategies : DogApiUrls<int>
+    {
+
 
     }
 }

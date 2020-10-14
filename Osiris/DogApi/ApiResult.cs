@@ -15,5 +15,7 @@ namespace Osiris.DogApi
 
         public string ErrorMessage { get; set; }
 
+        public bool IsCachedData { get; set; }
+
     }
 }
