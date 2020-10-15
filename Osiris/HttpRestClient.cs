@@ -15,7 +15,7 @@ namespace Osiris
 
         public HttpRestClient(IHttpClientFactory factory)
         {
-            _dogsAPIclient = factory.CreateClient("base");
+            _dogsAPIclient = factory.CreateClient("api");
         }
 
         public async Task<ApiResult<T>> GetAsync<T>(string url)

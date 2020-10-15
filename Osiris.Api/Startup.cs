@@ -33,7 +33,7 @@ namespace Osiris.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddHttpClient("DogsAPI", client =>
+            services.AddHttpClient("api", client =>
             {
                 client.BaseAddress = new Uri(Configuration.GetSection("DogApi:baseUrl").Value);
                 client.DefaultRequestHeaders.Add("x-api-key", Configuration.GetSection("DogApi:key").Value);

@@ -58,9 +58,10 @@ namespace Osiris.BlazorApp.Clients
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<List<Image>>> GetRandomDog()
+        public async Task<ApiResult<List<Image>>> GetRandomDog()
         {
-            throw new NotImplementedException();
+            var temp = await _restClient.GetAsync<List<Image>>("api/dogs/random");
+            return temp;
         }
 
         public async Task<ApiResult<List<Image>>> SearchAllImages(string list)
