@@ -8,46 +8,66 @@
 
 
     <div>
-        @foreach (Image dog in RandomDogs)
-        {
 
-            <div style="height:400px; width:500px">
-                <MatCard class="demo-mat-card">
-                    <MatCardContent>
-                        <MatCardMedia Wide="true" ImageUrl="@dog.url">
-                            <div class="demo-mat-card-content" style="color: white;">
-                                <MatHeadline6 class="demo-mat-card-clean-margin">
-                                    @*@if (@dog.breeds.Count > 0)
-                                        @dog.breeds?.First()?.breed_group*@
-                                </MatHeadline6>
-                                <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                    by Kurt Wagner
-                                </MatSubtitle2>
-                            </div>
-                        </MatCardMedia>
-                        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                            @*@if (@dog.breeds.Count > 0)
-        Country: @dog.breeds?.First()?.country_code*@
-                        </MatBody2>
-                    </MatCardContent>
-                    <MatCardActions>
-                        <MatCardActionButtons>
-                            <MatButton>Read</MatButton>
-                            <MatButton>Bookmark</MatButton>
-                        </MatCardActionButtons>
+        <div class="grid-container">
+            @foreach (Image dog in RandomDogs)
+            {
 
-                        <MatCardActionIcons>
-                            <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
-                            <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
-                        </MatCardActionIcons>
-                    </MatCardActions>
-                </MatCard>
-            </div>
+                <div class="grid-item">
+                    <MatCard class="demo-mat-card">
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="@dog.url">
+                                <div class="demo-mat-card-content" style="color: white;">
+                                    <MatHeadline6 class="demo-mat-card-clean-margin">
+                                        @*@if (@dog.breeds.Count > 0)
+                                            @dog.breeds?.First()?.breed_group*@
+                                    </MatHeadline6>
+                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                        by Kurt Wagner
+                                    </MatSubtitle2>
+                                </div>
+                            </MatCardMedia>
+                            <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                                @*@if (@dog.breeds.Count > 0)
+                                    Country: @dog.breeds?.First()?.country_code*@
+                            </MatBody2>
+                        </MatCardContent>
+                        <MatCardActions>
+                            <MatCardActionButtons>
+                                <MatButton>Read</MatButton>
+                                <MatButton>Bookmark</MatButton>
+                            </MatCardActionButtons>
+
+                            <MatCardActionIcons>
+                                <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                                <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
+                            </MatCardActionIcons>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
 
 
-        }
+            }
+
+        </div>
+
+
     </div>
 
 
 }
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 10px;
+    }
+
+    .grid-item {
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+</style>
 
