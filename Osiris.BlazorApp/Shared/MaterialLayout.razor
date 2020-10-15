@@ -18,7 +18,13 @@
                         </MatList>
                     </MatMenu>
                 </p>
-                <MatAppBarTitle>Osiris explorer Presents... Dog API</MatAppBarTitle>
+                <MatAppBarTitle>
+                    <div class="app-bar-container">
+                        <div class="app-bar-item">Osiris Explorer</div>
+                        <div class="spacer"></div>
+                        <div class="app-bar-item">Dog API</div>
+                    </div>
+                </MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
                 <MatIconButton Icon="favorite"></MatIconButton>
@@ -39,14 +45,20 @@
 </MatAppBarContainer>
 
 <style>
-    .grid-container {
-        display: grid;
+    .app-bar-container {
+        align-items:center;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    .app-bar-item {
+        margin-right: 30px;
     }
 
 
-    .content {
-        margin-top: 20px;
-        margin-bottom: 20px;
+    .spacer {
+        /*width:50%;*/
     }
 </style>
 
