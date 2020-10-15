@@ -1,0 +1,53 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="container">
+    <div class="item">
+        <MatButton Icon="favorite" OnClick="@OnFacebookClicked" Label="Facebook"></MatButton>
+    </div>
+    <div class="item">
+        <MatButton Icon="image" OnClick="@OnInstagramClicked" Label="Instagram"></MatButton>
+    </div>
+    <div class="item"
+        <MatButton Icon="video" OnClick="@OnYouTubeClicked" Label="Instagram"></MatButton>
+    </div>
+    <div class="item">Blazor</div>
+    <div class="item">About Me</div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-content: space-around
+        /* display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 10px;*/
+    }
+
+    .item {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        /* padding: 20px;
+        font-size: 30px;
+        text-align: center;*/
+    }
+</style>
+
+@code {
+    public void OnFacebookClicked()
+    {
+        NavigationManager.NavigateTo("http://www.facebook.com");
+
+    }
+
+    public void OnInstagramClicked()
+    {
+
+    }
+
+    public void OnYouTubeClicked()
+    {
+
+    }
+}

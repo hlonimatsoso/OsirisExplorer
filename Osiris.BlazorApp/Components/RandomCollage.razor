@@ -9,11 +9,11 @@
 
     <div>
 
-        <div class="grid-container">
+        <div class="container">
             @foreach (Image dog in RandomDogs)
             {
 
-                <div class="grid-item">
+                <div class="item">
                     <MatCard class="demo-mat-card">
                         <MatCardContent>
                             <MatCardMedia Wide="true" ImageUrl="@dog.url">
@@ -62,16 +62,22 @@
 }
 
 <style>
-    .grid-container {
-        display: grid;
+    .container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content:space-between;
+        align-content:space-around
+        /* display: grid;
         grid-template-columns: auto auto auto;
-        padding: 10px;
+        padding: 10px;*/
     }
 
-    .grid-item {
-        padding: 20px;
+    .item {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        /* padding: 20px;
         font-size: 30px;
-        text-align: center;
+        text-align: center;*/
     }
 </style>
 

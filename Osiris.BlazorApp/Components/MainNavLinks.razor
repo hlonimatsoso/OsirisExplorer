@@ -1,0 +1,42 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="container">
+    <div class="item">
+        <MatButton Icon="favorite" OnClick="@OnBreedsClick" Label="Breed"></MatButton>
+    </div>
+    <div class="item">
+        <NavLink class="nav-link" href="glossory" Match="NavLinkMatch.All">
+            <span class="oi oi-home" aria-hidden="true"></span> Glossory
+        </NavLink>
+    </div>
+    <div class="item">Dog API</div>
+    <div class="item">Blazor</div>
+    <div class="item">About Me</div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-content: space-around
+        /* display: grid;
+        grid-template-columns: auto auto auto;
+        padding: 10px;*/
+    }
+
+    .item {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        /* padding: 20px;
+        font-size: 30px;
+        text-align: center;*/
+    }
+</style>
+
+@code {
+    public void OnBreedsClick()
+    {
+        NavigationManager.NavigateTo("breeds");
+    }
+}

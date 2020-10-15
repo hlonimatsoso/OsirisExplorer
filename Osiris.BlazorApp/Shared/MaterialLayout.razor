@@ -5,8 +5,20 @@
     <MatAppBar>
         <MatAppBarRow>
             <MatAppBarSection>
-                <MatIconButton Icon="menu"></MatIconButton>
-                <MatAppBarTitle>MatBlazor - Material Design components for Blazor</MatAppBarTitle>
+                <p>
+                    <MatIconButton Icon="menu" @ref="OpenMenuButton" OnClick="OnOpenMenu"></MatIconButton>
+
+                    <MatMenu @ref="Menu">
+                        <MatList>
+                            <MatListItem>Breeds</MatListItem>
+                            <MatListItem>Glossory</MatListItem>
+                            <MatListItem>Dog API</MatListItem>
+                            <MatListItem>Blazor</MatListItem>
+                            <MatListItem>About Me</MatListItem>
+                        </MatList>
+                    </MatMenu>
+                </p>
+                <MatAppBarTitle>Osiris explorer Presents... Dog API</MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
                 <MatIconButton Icon="favorite"></MatIconButton>
@@ -15,24 +27,36 @@
     </MatAppBar>
 
     <MatAppBarContent>
-        @*<div class="sidebar">
-                <NavMenu />
-            </div>
 
-            <div class="main">
-                <div class="top-row px-4">
-                    <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-                </div>*@
-        <div class="content px-4">
+        <div class="content">
+            <MainNavLinks></MainNavLinks>
+
             @Body
         </div>
-        @*</div>*@
+        <div class="page_link">xxxx</div> | <div>yyyyyy</div> | <div>zzzz</div>
+
     </MatAppBarContent>
 </MatAppBarContainer>
 
+<style>
+    .grid-container {
+        display: grid;
+    }
 
+
+    .content {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
 
 
 @code{
+    BaseMatIconButton OpenMenuButton;
+    BaseMatMenu Menu;
 
+    public void OnOpenMenu(MouseEventArgs e)
+    {
+        this.Menu.OpenAsync(OpenMenuButton.Ref);
+    }
 }
