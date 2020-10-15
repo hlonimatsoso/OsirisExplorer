@@ -45,6 +45,8 @@ namespace Osiris.BlazorApp.Pages
             else
                 ErrorMessage = apiResult.ErrorMessage;
 
+            await InvokeAsync(() => { StateHasChanged(); });
+
             await base.OnInitializedAsync();
 
         }

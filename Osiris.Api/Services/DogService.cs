@@ -12,29 +12,34 @@ using System.Threading.Tasks;
 
 namespace Osiris.Api.DogApi
 {
-    public class DogService : ApiBase, IApiBase, IDogService
+    public class DogService : IDogService
     {
 
+        IHttpRestClient _restClient;
         ILogger<DogService> _logger;
+        IOptions<DogApiSettings> _settings;
 
-        public DogService(IHttpClientFactory factory, IOptions<DogApiSettings> settings, ICacheIsKing cache, ILogger<DogService> logger) : base(factory, settings)
+        public DogService(IHttpRestClient restClient, ILogger<DogService> logger, IOptions<DogApiSettings> settings, ICacheIsKing cache)
         {
-            Cache = cache;
+            _restClient = restClient;
             _logger = logger;
+            _settings = settings;
+            Cache = cache;
         }
+
 
         public ICacheIsKing Cache { get; set; }
 
         public async Task<ApiResult<List<Breed>>> GetAllBreeds()
         {
-            string url = $"{DbSettings.Value.urls.breeds}";
+            string url = $"{_settings.Value.urls.breeds}";
 
             ApiResult<List<Breed>> cacheEntry;
 
             if (Cache.TryGetCache(url, out cacheEntry))
                 cacheEntry.IsCachedData = true;
             else
-                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, DbSettings.Value.cache_stratergies.breeds);
+                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, _settings.Value.cache_stratergies.breeds);
 
             return cacheEntry;
         }
@@ -43,7 +48,7 @@ namespace Osiris.Api.DogApi
         {
             _logger.LogInformation($"Caching data for {url}");
 
-            ApiResult<T> cacheEntry = await Get<T>(url);
+            ApiResult<T> cacheEntry = await _restClient.GetAsync<T>(url);
 
             return Cache.SetCache(url, cacheEntry, cacheDuration);
              
@@ -53,7 +58,7 @@ namespace Osiris.Api.DogApi
 
         public async Task<ApiResult<List<Breed>>> GetBreedById(string breedId)
         {
-            string url = $"{DbSettings.Value.urls.breeds}";
+            string url = $"{_settings.Value.urls.breeds}";
 
             if (!string.IsNullOrEmpty(breedId))
                 url = $"{url}/search?breed_ids={breedId}";
@@ -63,13 +68,13 @@ namespace Osiris.Api.DogApi
             if (Cache.TryGetCache(url, out cacheEntry))
                 cacheEntry.IsCachedData = true;
             else
-                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, DbSettings.Value.cache_stratergies.images);
+                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, _settings.Value.cache_stratergies.images);
 
             return cacheEntry;
         }
         public async Task<ApiResult<List<Breed>>> GetBreedByName(string breedName)
         {
-            string url = $"{DbSettings.Value.urls.breeds}";
+            string url = $"{_settings.Value.urls.breeds}";
 
             if (!string.IsNullOrEmpty(breedName))
                 url = $"{url}/search?q={breedName}";
@@ -79,14 +84,14 @@ namespace Osiris.Api.DogApi
             if (Cache.TryGetCache(url, out cacheEntry))
                 cacheEntry.IsCachedData = true;
             else
-                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, DbSettings.Value.cache_stratergies.images);
+                cacheEntry = await GetAndCacheDataAync<List<Breed>>(url, _settings.Value.cache_stratergies.images);
 
             return cacheEntry;
         }
 
         public async Task<ApiResult<List<Image>>> GetDogByBreedId(int breedId)
         {
-            string url = $"{DbSettings.Value.urls.images}";
+            string url = $"{_settings.Value.urls.images}";
 
             url = $"{url}/search?breed_id={breedId}";
 
@@ -95,7 +100,7 @@ namespace Osiris.Api.DogApi
             if (Cache.TryGetCache(url, out cacheEntry))
                 cacheEntry.IsCachedData = true;
             else
-                cacheEntry = await GetAndCacheDataAync<List<Image>>(url, DbSettings.Value.cache_stratergies.images);
+                cacheEntry = await GetAndCacheDataAync<List<Image>>(url, _settings.Value.cache_stratergies.images);
 
             return cacheEntry;
         }
@@ -104,11 +109,11 @@ namespace Osiris.Api.DogApi
         {
             // No caching for random dogs
 
-            string url = $"{DbSettings.Value.urls.images}";
+            string url = $"{_settings.Value.urls.images}";
 
             url = $"{url}/search";
 
-            var r = await Get<List<Image>>(url);
+            var r = await _restClient.GetAsync<List<Image>>(url);
 
             return r;
         }

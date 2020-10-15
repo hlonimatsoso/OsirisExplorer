@@ -61,7 +61,7 @@ namespace Osiris.Api
 
             services.AddTransient<IOsirisCacheWarmer, OsirisCacheWarmer>();
 
-            
+            services.AddScoped<IHttpRestClient, HttpRestClient>();
 
             services.AddSwaggerGen();
 
