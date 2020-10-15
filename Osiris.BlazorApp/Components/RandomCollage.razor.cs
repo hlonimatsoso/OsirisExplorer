@@ -63,6 +63,8 @@ namespace Osiris.BlazorApp.Components
                 ApiResult<List<Image>> doggie = await DogsClient.GetRandomDog();
                 Logger.LogInformation($"Retrieved random dog # {i} : {JsonConvert.SerializeObject(doggie.Results.First())}");
                 RandomDogs.Add(doggie.Results.First());
+                await InvokeAsync(() => { StateHasChanged(); });
+
             }
         }
     }
