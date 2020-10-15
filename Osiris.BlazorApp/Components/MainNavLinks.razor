@@ -5,32 +5,33 @@
         <MatButton Icon="favorite" OnClick="@OnBreedsClick" Label="Breed"></MatButton>
     </div>
     <div class="item">
-        <NavLink class="nav-link" href="glossory" Match="NavLinkMatch.All">
-            <span class="oi oi-home" aria-hidden="true"></span> Glossory
-        </NavLink>
+        <MatButton Icon="favorite" OnClick="@OnGlossoryClick" Label="Glossory"></MatButton>
     </div>
-    <div class="item">Dog API</div>
-    <div class="item">Blazor</div>
-    <div class="item">About Me</div>
+    <div class="item">
+        <MatButton Icon="favorite" OnClick="@OnContactUsClick" Label="Contact Us"></MatButton>
+    </div>
+    <div class="item">
+        <MatButton Icon="favorite" OnClick="@OnAboutClick" Label="About Osiris Explorer"></MatButton>
+    </div>
 </div>
+
+
 
 <style>
     .container {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-        align-content: space-around
-        /* display: grid;
-        grid-template-columns: auto auto auto;
-        padding: 10px;*/
+        align-content: space-around;
+
     }
 
     .item {
         margin-top: 15px;
         margin-bottom: 15px;
-        /* padding: 20px;
-        font-size: 30px;
-        text-align: center;*/
+    }
+    a{
+
     }
 </style>
 
@@ -38,5 +39,20 @@
     public void OnBreedsClick()
     {
         NavigationManager.NavigateTo("breeds");
+    }
+
+    public void OnGlossoryClick()
+    {
+        NavigationManager.NavigateTo("glossory");
+    }
+
+    public void OnContactUsClick()
+    {
+        NavigationManager.NavigateTo("contact-us");
+    }
+
+    public void OnAboutClick()
+    {
+        NavigationManager.NavigateTo("about-us");
     }
 }
