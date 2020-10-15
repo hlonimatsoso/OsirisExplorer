@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Osiris.Interfaces
 {
-    public interface ICacheWarmer
+    public interface IConfigClient
     {
-        Task<bool> WarmCache();
+        Task<int> GetPictureCallageCount();
     }
 }

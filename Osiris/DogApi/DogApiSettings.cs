@@ -10,6 +10,8 @@ namespace Osiris.DogApi
 
         public string key { get; set; }
 
+        public int RandomPictureCallageCount { get; set; }
+
         public DogApiUrls urls { get; set; }
 
         public DogApiCacheStrategies cache_stratergies { get; set; }

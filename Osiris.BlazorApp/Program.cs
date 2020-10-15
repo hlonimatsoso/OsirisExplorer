@@ -19,9 +19,20 @@ namespace Osiris.BlazorApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:62222/") });
+            builder.Services.AddHttpClient("base", c =>
+            {
+                c.BaseAddress = new Uri("https://localhost:62222/");
+            });
+
+
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:62222/") });
 
             builder.Services.AddScoped<IDogsApiClient, DogsApiClient>();
+
+            builder.Services.AddScoped<IConfigClient, ConfigClient>();
+
+            builder.Services.AddScoped<IHttpRestClient, HttpRestClient>();
+
 
             await builder.Build().RunAsync();
         }
