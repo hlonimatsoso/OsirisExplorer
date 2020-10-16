@@ -18,9 +18,15 @@ namespace Osiris.BlazorApp.Pages
 
         public ApiResult<List<Breed>> AllBreedsResult { get; set; }
 
+        public List<Image> AllDogs { get; set; }
+
+
         protected async override void OnInitialized()
         {
             AllBreedsResult = await DogsClient.GetAllBreeds();
+
+            AllDogs = DogsClient.Dogs;
+
             await InvokeAsync(() => { StateHasChanged(); });
 
         }

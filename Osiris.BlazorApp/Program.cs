@@ -26,7 +26,7 @@ namespace Osiris.BlazorApp
             });
 
 
-            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:62222/") });
+            builder.Services.AddScoped(sp => new HttpClient { });
 
             builder.Services.AddScoped<IDogsApiClient, DogsApiClient>();
 

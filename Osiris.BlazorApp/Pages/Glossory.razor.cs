@@ -14,6 +14,16 @@ namespace Osiris.BlazorApp.Pages
         [Parameter]
         public List<Breed> Breeds { get; set; }
 
+        public List<Image> Dogs
+        {
+            get
+            {
+                if (Client != null) return Client.Dogs;
+                else
+                    return null;
+
+            }
+        }
 
         public string ErrorMessage { get; set; }
 
