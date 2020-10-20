@@ -1,66 +1,74 @@
 ﻿@inherits BreedsBase
 @page "/breeds"
 
-@if (AllDogs != null)
-{
-    <h3>Breeds (@AllDogs.Count)</h3>
+<Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)">
 
-    <FullSearch @bind-Dogs="AllDogs" @bind-FilteredDogs="FilteredDogs" @bind-FilteredDogs:event="FilteredDogsChanged"></FullSearch>
-
-    @if (FilteredDogs != null)
+    @if (AllDogs != null)
     {
-        <div class="container">
+        <h3>Breeds (@AllDogs.Count)</h3>
 
-            @foreach (var dog in FilteredDogs)
-            {
 
-                <div class="item">
-                    <MatCard>
-                        <MatCardContent>
-                            <MatCardMedia Wide="true" ImageUrl="@dog.url">
-                                <div class="demo-mat-card-content" style="color: white;">
-                                    <MatHeadline6 class="demo-mat-card-clean-margin">
-                                        @*@if (@dog.breeds.Count > 0)
-                                            @dog.breeds?.First()?.breed_group*@
-                                    </MatHeadline6>
-                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                        @if (dog.breeds != null && dog.breeds.Count > 0)
-                                        {
-                                            @dog.breeds.First().name
 
-                                        }
+        <FullSearch @bind-Dogs="AllDogs" @bind-FilteredDogs="FilteredDogs" @bind-FilteredDogs:event="FilteredDogsChanged"></FullSearch>
 
-                                    </MatSubtitle2>
-                                </div>
-                            </MatCardMedia>
-                            <MatBody2>
-                                @if (dog.breeds != null && dog.breeds.Count > 0)
-                                    @dog.breeds.First().bred_for
-                            </MatBody2>
-                        </MatCardContent>
-                        <MatCardActions>
-                            <MatCardActionButtons>
-                                <MatButton>Read</MatButton>
-                                <MatButton>Bookmark</MatButton>
-                            </MatCardActionButtons>
+        @if (FilteredDogs != null)
+        {
+            <div class="container">
 
-                            <MatCardActionIcons>
-                                <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
-                                <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
-                            </MatCardActionIcons>
-                        </MatCardActions>
-                    </MatCard>
-                </div>
+                @foreach (var dog in FilteredDogs)
+                {
 
-            }
-        </div>
+                <Animate Animation="Animations.FlipUp" Duration="TimeSpan.FromSeconds(1.5)">
+                    <div class="item">
+                        <MatCard>
+                            <MatCardContent>
+                                <MatCardMedia Wide="true" ImageUrl="@dog.url">
+                                    <div class="demo-mat-card-content" style="color: white;">
+                                        <MatHeadline6 class="demo-mat-card-clean-margin">
+                                            @*@if (@dog.breeds.Count > 0)
+                                @dog.breeds?.First()?.breed_group*@
+                                        </MatHeadline6>
+                                        <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                            @if (dog.breeds != null && dog.breeds.Count > 0)
+                                            {
+                                                @dog.breeds.First().name
+
+                                            }
+
+                                        </MatSubtitle2>
+                                    </div>
+                                </MatCardMedia>
+                                <MatBody2>
+                                    @if (dog.breeds != null && dog.breeds.Count > 0)
+                                        @dog.breeds.First().bred_for
+                                </MatBody2>
+                            </MatCardContent>
+                            <MatCardActions>
+                                <MatCardActionButtons>
+                                    <MatButton>Read</MatButton>
+                                    <MatButton>Bookmark</MatButton>
+                                </MatCardActionButtons>
+
+                                <MatCardActionIcons>
+                                    <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                                    <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
+                                </MatCardActionIcons>
+                            </MatCardActions>
+                        </MatCard>
+                    </div>
+                </Animate>
+
+
+                }
+            </div>
+        }
     }
-}
-else
-{
-    <h3>Loading Breeds...</h3>
+    else
+    {
+        <h3>Loading Breeds...</h3>
 
-}
+    }
+</Animate>
 <style>
     .container {
         width: 100%;

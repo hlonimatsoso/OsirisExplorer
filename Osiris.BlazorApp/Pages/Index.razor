@@ -5,10 +5,13 @@
 
 <div class="container">
     <div class="item">
-        <h3>Welcome home, the home to Osiris, exploring <a class="grey" target="_blank" href="https://thedogapi.com/">The Dog API</a> </h3>
+        <Animate Animation="Animations.FlipDown" Duration="TimeSpan.FromSeconds(2)">
+            <h3>Welcome home, the home to Osiris, exploring <a class="grey" target="_blank" href="https://thedogapi.com/">The Dog API</a> </h3>
+        </Animate>
     </div>
     <div class="item">
         <RandomCollage></RandomCollage>
+
 
     </div>
 </div>
@@ -24,8 +27,8 @@
     item {
         margin: 20px;
     }
-    .grey{
-        color:grey;
-    }
 
+    .grey {
+        color: grey;
+    }
 </style>

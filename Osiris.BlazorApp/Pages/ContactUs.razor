@@ -1,56 +1,60 @@
 ﻿@page "/contact-us"
 
 
-<h3>Contact Us</h3>
+<Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(1.5)">
+    <h3>Contacts</h3>
+</Animate>
+<Animate Animation="Animations.SlideUp" Duration="TimeSpan.FromSeconds(1)">
+    <div class="contact-container">
 
-<div class="contact-container">
+        <div class="item">
+            <p>
+                <MatTextField @bind-Value="@Name" OnKeyUp="@OnNameChanged" Label="Name"></MatTextField>
+            </p>
+        </div>
 
-    <div class="item">
-        <p >
-            <MatTextField @bind-Value="@Name" OnKeyUp="@OnNameChanged" Label="Name"></MatTextField>
-        </p>
+        <div class="contact-item">
+            <MatTextField @bind-Value="@EmailAddress" Label="Email Address"></MatTextField>
+
+        </div>
+
+        <div class="contact-item">
+            <p>
+                <MatTextField @bind-Value="@Message" Label="Message" TextArea="true"></MatTextField>
+            </p>
+        </div>
+        <div class="itemcontact-">
+            <p>
+                <MatButton OnClick="@Submit" Disabled="@(!CanSubmit)">Submit</MatButton>
+            </p>
+        </div>
+
+        <p>@Name</p>
+        <p>@EmailAddress</p>
+        <p>@Message</p>
+
+
     </div>
+</Animate>
 
-    <div class="contact-item">
-        <MatTextField @bind-Value="@EmailAddress" Label="Email Address"></MatTextField>
-
-    </div>
-
-    <div class="contact-item">
-        <p>
-            <MatTextField @bind-Value="@Message" Label="Message" TextArea="true"></MatTextField>
-        </p>
-    </div>
-    <div class="itemcontact-">
-        <p>
-            <MatButton OnClick="@Submit" Disabled="@(!CanSubmit)">Submit</MatButton>
-        </p>
-    </div>
-
-    <p>@Name</p>
-    <p>@EmailAddress</p>
-    <p>@Message</p>
-
-
-</div>
 
 
 <style>
-    .wide{
-        width:100%;
+    .wide {
+        width: 100%;
     }
+
     .contact-container {
         display: flex;
         flex-flow: column wrap;
         justify-content: space-between;
-        align-content:center;
+        align-content: center;
     }
 
     .contact-item {
         margin-top: 15px;
         margin-bottom: 15px;
     }
-
 </style>
 
 @code {
