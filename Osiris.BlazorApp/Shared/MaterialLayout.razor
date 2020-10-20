@@ -20,15 +20,18 @@
                     </MatMenu>
                 </p>
                 <MatAppBarTitle>
-                    <div class="app-bar-container">
-                        <div class="app-bar-item">
-                            <NavLink href="" Match="NavLinkMatch.All">
-                                <span class="oi oi-home" aria-hidden="true"></span> Osiris Explorer
-                            </NavLink>
+                    <Animate Animation="Animations.ZoomInUp" Duration="TimeSpan.FromSeconds(2.5)">
+                        <div class="app-bar-container">
+                            <div class="app-bar-item">
+                                <NavLink href="" Match="NavLinkMatch.All">
+                                    <span class="oi oi-home" aria-hidden="true"></span> Osiris Explorer
+                                </NavLink>
+                            </div>
+                            <div class="spacer"></div>
+                            <div class="app-bar-item">Dog API</div>
                         </div>
-                        <div class="spacer"></div>
-                        <div class="app-bar-item">Dog API</div>
-                    </div>
+                    </Animate>
+
                 </MatAppBarTitle>
             </MatAppBarSection>
             <MatAppBarSection Align="@MatAppBarSectionAlign.End">
@@ -41,7 +44,6 @@
 
         <div class="content">
             <MainNavLinks></MainNavLinks>
-
             @Body
         </div>
         <FooterNavLinks></FooterNavLinks>
