@@ -5,52 +5,73 @@
 {
     <h3>Breeds (@AllDogs.Count)</h3>
 
-    <div class="container">
-        @foreach (var dog in AllDogs)
-        {
+    <FullSearch @bind-Dogs="AllDogs" @bind-FilteredDogs="FilteredDogs" @bind-FilteredDogs:event="FilteredDogsChanged"></FullSearch>
 
-            <div class="item">
-                <MatCard>
-                    <MatCardContent>
-                        <MatCardMedia Wide="true" ImageUrl="@dog.url">
-                            <div class="demo-mat-card-content" style="color: white;">
-                                <MatHeadline6 class="demo-mat-card-clean-margin">
-                                    @*@if (@dog.breeds.Count > 0)
-                                        @dog.breeds?.First()?.breed_group*@
-                                </MatHeadline6>
-                                <MatSubtitle2 class="demo-mat-card-clean-margin">
-                                    @dog.breeds.First().name
-                                </MatSubtitle2>
-                            </div>
-                        </MatCardMedia>
-                        <MatBody2>
-                           @dog.breeds.First().bred_for
-                        </MatBody2>
-                    </MatCardContent>
-                    <MatCardActions>
-                        <MatCardActionButtons>
-                            <MatButton>Read</MatButton>
-                            <MatButton>Bookmark</MatButton>
-                        </MatCardActionButtons>
+    @if (FilteredDogs != null)
+    {
+        <div class="container">
 
-                        <MatCardActionIcons>
-                            <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
-                            <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
-                        </MatCardActionIcons>
-                    </MatCardActions>
-                </MatCard>
-            </div>
+            @foreach (var dog in FilteredDogs)
+            {
 
-        }
-    </div>
+                <div class="item">
+                    <MatCard>
+                        <MatCardContent>
+                            <MatCardMedia Wide="true" ImageUrl="@dog.url">
+                                <div class="demo-mat-card-content" style="color: white;">
+                                    <MatHeadline6 class="demo-mat-card-clean-margin">
+                                        @*@if (@dog.breeds.Count > 0)
+                                            @dog.breeds?.First()?.breed_group*@
+                                    </MatHeadline6>
+                                    <MatSubtitle2 class="demo-mat-card-clean-margin">
+                                        @if (dog.breeds != null && dog.breeds.Count > 0)
+                                        {
+                                            @dog.breeds.First().name
 
+                                        }
 
+                                    </MatSubtitle2>
+                                </div>
+                            </MatCardMedia>
+                            <MatBody2>
+                                @if (dog.breeds != null && dog.breeds.Count > 0)
+                                    @dog.breeds.First().bred_for
+                            </MatBody2>
+                        </MatCardContent>
+                        <MatCardActions>
+                            <MatCardActionButtons>
+                                <MatButton>Read</MatButton>
+                                <MatButton>Bookmark</MatButton>
+                            </MatCardActionButtons>
 
+                            <MatCardActionIcons>
+                                <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                                <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
+                            </MatCardActionIcons>
+                        </MatCardActions>
+                    </MatCard>
+                </div>
+
+            }
+        </div>
+    }
 }
 else
 {
-    <h3>Breeds (dololo...)</h3>
+    <h3>Loading Breeds...</h3>
 
 }
+<style>
+    .container {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
 
+    .item {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+</style>
 

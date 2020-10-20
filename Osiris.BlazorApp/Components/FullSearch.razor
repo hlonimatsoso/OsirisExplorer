@@ -1,0 +1,18 @@
+﻿@inherits FullSearchBase
+
+<h4>Full Search</h4>
+
+@if (FilteredDogs != null)
+{
+    @FilteredDogs.Count
+}
+
+<div class="container">
+    <div class="item">
+            <MatTextField @bind-Value="@SearchString" OnInput="@(e => SearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp"  Label="Name"></MatTextField>
+        </div>
+</div>
+
+@code {
+
+}
