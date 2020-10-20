@@ -15,7 +15,12 @@ namespace Osiris.BlazorApp.Components
 
     public class RandomCollageBase : ComponentBase
     {
+        [Inject] public IOsirisEvents OsirisEvents { get; set; }
+
+
+
         [Inject] public IConfigClient ConfigClient { get; set; }
+
         [Inject] public IDogsApiClient DogsClient { get; set; }
 
         [Inject] private ILogger<RandomCollageBase> Logger { get; set; }
@@ -46,9 +51,16 @@ namespace Osiris.BlazorApp.Components
             if (_pictureCallageCount == 0)
                 _pictureCallageCount = await ConfigClient.GetPictureCallageCount();
 
+            OsirisEvents.IsBusy = true;
+            Logger.LogError($"OsirisEvents.IsBusyAsync : {OsirisEvents.IsBusy}");
+            await OsirisEvents.IsBusyChanged.InvokeAsync(OsirisEvents.IsBusy);
             await InitilizeRndomDogs();
-
             await InvokeAsync(() => { StateHasChanged(); });
+
+
+            OsirisEvents.IsBusy = false;
+            await OsirisEvents.IsBusyChanged.InvokeAsync(OsirisEvents.IsBusy);
+            Logger.LogError($"OsirisEvents.IsBusyAsync : {OsirisEvents.IsBusy}");
 
             base.OnInitialized();
         }
@@ -60,12 +72,15 @@ namespace Osiris.BlazorApp.Components
 
             for (int i = 0; i < _pictureCallageCount; i++)
             {
+                OsirisEvents.IsBusyPercentage = (i / _pictureCallageCount) * 100;
+                await OsirisEvents.IsBusyPercentageChanged.InvokeAsync(OsirisEvents.IsBusyPercentage);
                 ApiResult<List<Image>> doggie = await DogsClient.GetRandomDog();
                 Logger.LogInformation($"Retrieved random dog # {i} : {JsonConvert.SerializeObject(doggie.Results.First())}");
                 RandomDogs.Add(doggie.Results.First());
                 await InvokeAsync(() => { StateHasChanged(); });
 
             }
+
         }
     }
 }

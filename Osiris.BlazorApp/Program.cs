@@ -38,6 +38,8 @@ namespace Osiris.BlazorApp
 
             builder.Services.AddScoped<IMemoryCache, MemoryCache>();
 
+            builder.Services.AddSingleton<IOsirisEvents,OsirisEvents>();
+            
 
             await builder.Build().RunAsync();
         }

@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NaviMan
+@inject IOsirisEvents Events
 
 
 <MatAppBarContainer>
@@ -44,6 +45,9 @@
 
         <div class="content">
             <MainNavLinks></MainNavLinks>
+
+            <MatProgressBar Indeterminate="true" Closed="!Events.IsBusy"></MatProgressBar>
+
             @Body
         </div>
         <FooterNavLinks></FooterNavLinks>
@@ -56,7 +60,6 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
-
     }
 
     .app-bar-item {
@@ -75,6 +78,13 @@
 
 
 @code{
+
+    protected override Task OnInitializedAsync()
+    {
+
+        return base.OnInitializedAsync();
+    }
+
     BaseMatIconButton OpenMenuButton;
     BaseMatMenu Menu;
 
