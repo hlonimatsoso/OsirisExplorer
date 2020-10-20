@@ -34,6 +34,13 @@ namespace Osiris.BlazorApp.Components
 
         private List<Image> _filteredList;
 
+        public int Count
+        {
+            get
+            {
+                return FilteredDogs == null ? 0 : FilteredDogs.Count;
+            }
+        }
 
         [Parameter] public List<Image> FilteredDogs { get; set; }
 
