@@ -2,17 +2,25 @@
 
 <div class="container">
     <div class="item">
-        <MatButton Icon="business" OnClick="@OnLinkedInClicked" Label="Linked In"></MatButton>
+        <Animate Animation="Animations.SlideUp" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="business" OnClick="@OnLinkedInClicked" Label="Linked In"></MatButton>
+        </Animate>
     </div>
 
     <div class="item">
-        <MatButton Icon="waves" OnClick="@OnFacebookClicked" Label="Facebook"></MatButton>
+        <Animate Animation="Animations.SlideUp" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="waves" OnClick="@OnFacebookClicked" Label="Facebook"></MatButton>
+        </Animate>
     </div>
     <div class="item">
-        <MatButton Icon="videocam" OnClick="@OnYouTubeClicked" Label="Youtube"></MatButton>
+        <Animate Animation="Animations.SlideUp" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="videocam" OnClick="@OnYouTubeClicked" Label="Youtube"></MatButton>
+        </Animate>
     </div>
     <div class="item">
-        <MatButton Icon="image" OnClick="@OnInstagramClicked" Label="Instagram"></MatButton>
+        <Animate Animation="Animations.SlideUp" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="image" OnClick="@OnInstagramClicked" Label="Instagram"></MatButton>
+        </Animate>
     </div>
 
 </div>

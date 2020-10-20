@@ -2,16 +2,24 @@
 
 <div class="container">
     <div class="item">
-        <MatButton Icon="dashboard" OnClick="@OnBreedsClick" Label="Breed"></MatButton>
+        <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="dashboard" OnClick="@OnBreedsClick" Label="Breed"></MatButton>
+        </Animate>
     </div>
     <div class="item">
-        <MatButton Icon="horizontal_split" OnClick="@OnGlossoryClick" Label="Glossory"></MatButton>
+        <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="horizontal_split" OnClick="@OnGlossoryClick" Label="Glossory"></MatButton>
+        </Animate>
     </div>
     <div class="item">
-        <MatButton Icon="feedback" OnClick="@OnContactUsClick" Label="Contact Us"></MatButton>
+        <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="feedback" OnClick="@OnContactUsClick" Label="Contact Us"></MatButton>
+        </Animate>
     </div>
     <div class="item">
-        <MatButton Icon="settings_input_component" OnClick="@OnAboutClick" Label="About Osiris Explorer"></MatButton>
+        <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(2)">
+            <MatButton Icon="settings_input_component" OnClick="@OnAboutClick" Label="About Osiris Explorer"></MatButton>
+        </Animate>
     </div>
 </div>
 
@@ -27,8 +35,7 @@
     }
 
     .item {
-        margin-top: 15px;
-        margin-bottom: 15px;
+        margin: 20px;
     }
     a{
 
