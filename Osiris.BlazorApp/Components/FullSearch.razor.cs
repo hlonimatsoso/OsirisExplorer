@@ -53,12 +53,14 @@ namespace Osiris.BlazorApp.Components
 
 
 
-        protected override void OnInitialized()
+        protected async override void OnInitialized()
         {
             FilteredDogs = new List<Image>();
             DebounceTimer = new Timer(500);
             DebounceTimer.Elapsed += OnUserFinish;
             DebounceTimer.AutoReset = false;
+            await FilteredDogsChanged.InvokeAsync(_initialDogs);
+
         }
 
         protected string SearchString { set; get; } = "";
