@@ -1,14 +1,14 @@
 ﻿@inherits FullSearchBase
 
 <div>
-    <h4>Full Search (@Count)</h4> 
+    <h4>Full Search (@Count)</h4>
 </div>
 <div class="container">
     <div class="item">
-            <MatTextField @bind-Value="@SearchString" OnInput="@(e => SearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp"  Label="Name"></MatTextField>
-        </div>
+        <MatTextField @bind-Value="@NameSearchString" OnInput="@(e => NameSearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp" Label="Name"></MatTextField>
+    </div>
+    <div class="item">
+        <MatTextField @bind-Value="@BreedSearchString" OnInput="@(e => BreedSearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp" Label="Breed"></MatTextField>
+    </div>
 </div>
 
-@code {
-
-}

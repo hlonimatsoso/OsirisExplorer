@@ -11,8 +11,6 @@ namespace Osiris.BlazorApp.Components
 {
     public class FullSearchBase : ComponentBase
     {
-        //[Inject] Logger<FullSearchBase> _logger { get; set; }
-
         private List<Image> _initialDogs;
 
         private List<Image> _dogs;
@@ -63,7 +61,10 @@ namespace Osiris.BlazorApp.Components
 
         }
 
-        protected string SearchString { set; get; } = "";
+        protected string NameSearchString { set; get; } = "";
+
+        protected string BreedSearchString { set; get; } = "";
+
 
         private Timer DebounceTimer;
         protected void HandleKeyUp()
@@ -73,7 +74,8 @@ namespace Osiris.BlazorApp.Components
         }
         private async void OnUserFinish(Object source, ElapsedEventArgs e)
         {
-            FilteredDogs = Dogs.Where(FilterName).ToList();
+            FilteredDogs = Dogs.Where(FilterName)
+                               .Where(FilterBreed).ToList();
 
             if (FilteredDogs == null)
                 await FilteredDogsChanged.InvokeAsync(_initialDogs);
@@ -84,7 +86,7 @@ namespace Osiris.BlazorApp.Components
 
         public bool FilterName(Image image)
         {
-            Console.WriteLine($"Filtering");
+            Console.WriteLine($"Filtering Name");
 
             bool result = false;
             string name = string.Empty;
@@ -92,15 +94,35 @@ namespace Osiris.BlazorApp.Components
             if (image.breeds != null && image.breeds.Count > 0)
             {
                 name = image.breeds.First().name.ToLower();
-                if (name.Contains(SearchString.ToLower()))
+                if (name.Contains(NameSearchString.ToLower()))
                     result = true;
 
             }
 
-            Console.WriteLine($"{name}.contains({SearchString}) = {result}");
+            Console.WriteLine($"{name}.contains({NameSearchString}) = {result}");
 
-            //if (_logger != null)
-            //    _logger.LogInformation($"{name}.contains({SearchString}) = {result}");
+            return result;
+        }
+
+        public bool FilterBreed(Image image)
+        {
+            Console.WriteLine($"Filtering Breed");
+
+            bool result = false;
+            string name = string.Empty;
+
+            if (image.breeds != null && image.breeds.Count > 0)
+            {
+                if(!string.IsNullOrEmpty(image.breeds.First().breed_group))
+                {
+                    name = image.breeds.First().breed_group.ToLower();
+                    if (name.Contains(BreedSearchString.ToLower()))
+                        result = true;
+                }
+                
+            }
+
+            Console.WriteLine($"{name}.contains({NameSearchString}) = {result}");
 
             return result;
         }

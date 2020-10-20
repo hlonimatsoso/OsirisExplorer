@@ -1,0 +1,52 @@
+﻿@inherits DogBase
+
+<Animate Animation="Animations.ZoomOutUp" Duration="TimeSpan.FromSeconds(1.5)">
+    <div class="item">
+        <MatCard class="demo-mat-card">
+            <MatCardContent>
+                <MatCardMedia Wide="true" ImageUrl="@Dog.url">
+                    <div class="demo-mat-card-content" style="color: white;">
+                        <MatHeadline6 class="demo-mat-card-clean-margin">
+                            @if (Dog.breeds.Count > 0)
+                            {
+                                @Dog.breeds.First().name
+
+                            }
+                        </MatHeadline6>
+                        <MatSubtitle2 class="demo-mat-card-clean-margin">
+
+                            @if (Dog.breeds != null && Dog.breeds.Count > 0)
+                            {
+
+                                <b>Country : </b> @Dog.breeds.First().country_code
+                            }
+                        </MatSubtitle2>
+                    </div>
+                </MatCardMedia>
+                <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                    @if (Dog.breeds != null && Dog.breeds.Count > 0)
+                    {
+                        <b>Breding Group: </b> @Dog.breeds.First().breed_group
+                        <br />
+                        <b>Bred For: </b> @Dog.breeds.First().bred_for
+                        <br />
+                        <b>Temprament : </b> @Dog.breeds.First().temprament
+                        <br />
+                        <b>Life Span : </b> @Dog.breeds.First().life_span
+                    }
+                </MatBody2>
+            </MatCardContent>
+            <MatCardActions>
+                <MatCardActionButtons>
+                    <MatButton>Read</MatButton>
+                    <MatButton>Bookmark</MatButton>
+                </MatCardActionButtons>
+
+                <MatCardActionIcons>
+                    <MatIconButton Icon="@MatIconNames.Favorite"></MatIconButton>
+                    <MatIconButton Icon="@MatIconNames.Dashboard"></MatIconButton>
+                </MatCardActionIcons>
+            </MatCardActions>
+        </MatCard>
+    </div>
+</Animate>
