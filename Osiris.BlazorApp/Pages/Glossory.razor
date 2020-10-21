@@ -1,67 +1,71 @@
 ﻿@inherits GlossoryBase
 @page "/glossory"
 
-
-<h3>Glossory (@BreedCount dogs cataloged)</h3>
+<Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(1)">
+    <h3>Glossory (@BreedCount dogs cataloged)</h3>
+</Animate>
 
 @if (string.IsNullOrEmpty(ErrorMessage))
 {
     @if (Breeds == null)
     {
-        <p>
-            <i>
-                Loading glossory breeds ...
-            </i>
-        </p>
+
+        <Animate Animation="Animations.SlideLeft" Duration="TimeSpan.FromSeconds(1)">
+
+            <p>
+                <i>
+                    Loading glossory breeds ...
+                </i>
+            </p>
+        </Animate>
+
     }
     else
     {
 
-<MatTable Items="@Dogs" class="mat-elevation-z5">
-    <MatTableHeader>
-        <th>Selfie</th>
-        <th>Info</th>
-    </MatTableHeader>
-    <MatTableRow>
-        <td>
-            <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(1)">
+        <MatTable Items="@Dogs" class="mat-elevation-z5">
+            <MatTableHeader>
+                <th>Selfie</th>
+                <th>Info</th>
+            </MatTableHeader>
+            <MatTableRow>
+                <td>
+                    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(1)">
 
-                <img height="40px" width="60px" src="@context.url" />
-            </Animate>
+                        <img height="40px" width="60px" src="@context.url" />
+                    </Animate>
 
-        </td>
-        <td>
-            <Animate Animation="Animations.ZoomOut" Duration="TimeSpan.FromSeconds(1)">
-                <div class="mat-layout-grid">
-                    <div class="mat-layout-grid-inner">
-                        <div class="mat-layout-grid-cell">
-                            <div class="mat-layout-grid-inner">
-                                @if (@context.breeds != null && @context.breeds.Count > 0)
-                                        {
-                                    <div class="mat-layout-grid-cell">Name: @context.breeds[0].name</div>
-                                    <div class="mat-layout-grid-cell">Breed group: @context.breeds[0].breed_group</div>
-                                        }
+                </td>
+                <td>
+                    <Animate Animation="Animations.ZoomOut" Duration="TimeSpan.FromSeconds(1)">
 
+                        @if (@context.breeds != null && @context.breeds.Count > 0)
+                                {
+
+                            <div class="container">
+                                <div class="item">
+                                    <b>Name :  </b> <span>@context.breeds[0].name</span>
+                                </div>
+                                <div class="item">
+                                    <b>Breed : </b> <span>@context.breeds[0].breed_group</span>
+                                </div>
+
+                                <div class="item">
+                                    <b>Bred For : </b> <span>@context.breeds[0].bred_for</span>
+                                </div>
+                                <div class="item">
+                                    <b>Temprament : </b> <span>@context.breeds[0].temprament</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mat-layout-grid-cell">
-                            <div class="mat-layout-grid-inner">
-                                @if (@context.breeds != null && @context.breeds.Count > 0)
-                                        {
-                                    <div class="mat-layout-grid-cell">Country Code: @context.breeds[0].country_code</div>
-                                    <div class="mat-layout-grid-cell">Bred For: @context.breeds[0].bred_for</div>
 
-                                        }
+                                }
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Animate>
 
-        </td>
-    </MatTableRow>
-</MatTable>
+                    </Animate>
+
+                </td>
+            </MatTableRow>
+        </MatTable>
     }
 
 

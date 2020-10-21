@@ -4,6 +4,7 @@ using Osiris.DogApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -49,6 +50,24 @@ namespace Osiris.BlazorApp.Components
 
         [Parameter] public EventCallback<List<Image>> DogsChanged { get; set; }
 
+        public string BreedList
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                if (Dogs != null)
+                    foreach (Image dog in Dogs)
+                    {
+
+                        if (dog.breeds != null && dog.breeds.Count > 0)
+                            sb.Append(",").Append(dog.breeds.First().breed_group);
+                    }
+                var list = sb.ToString().Split(',').ToList().Distinct();
+
+                return string.Join(',', list);
+            }
+        }
+        public string NameList { get; set; }
 
 
         protected async override void OnInitialized()
@@ -74,6 +93,14 @@ namespace Osiris.BlazorApp.Components
         }
         private async void OnUserFinish(Object source, ElapsedEventArgs e)
         {
+            if (string.IsNullOrEmpty(NameSearchString) && string.IsNullOrEmpty(BreedSearchString))
+            {
+                await FilteredDogsChanged.InvokeAsync(_initialDogs);
+                return;
+
+
+            }
+
             FilteredDogs = Dogs.Where(FilterName)
                                .Where(FilterBreed).ToList();
 
@@ -86,6 +113,9 @@ namespace Osiris.BlazorApp.Components
 
         public bool FilterName(Image image)
         {
+            if (string.IsNullOrEmpty(NameSearchString))
+                return true;
+
             Console.WriteLine($"Filtering Name");
 
             bool result = false;
@@ -106,6 +136,9 @@ namespace Osiris.BlazorApp.Components
 
         public bool FilterBreed(Image image)
         {
+            if (string.IsNullOrEmpty(BreedSearchString))
+                return true;
+
             Console.WriteLine($"Filtering Breed");
 
             bool result = false;
@@ -113,13 +146,13 @@ namespace Osiris.BlazorApp.Components
 
             if (image.breeds != null && image.breeds.Count > 0)
             {
-                if(!string.IsNullOrEmpty(image.breeds.First().breed_group))
+                if (!string.IsNullOrEmpty(image.breeds.First().breed_group))
                 {
                     name = image.breeds.First().breed_group.ToLower();
                     if (name.Contains(BreedSearchString.ToLower()))
                         result = true;
                 }
-                
+
             }
 
             Console.WriteLine($"{name}.contains({NameSearchString}) = {result}");

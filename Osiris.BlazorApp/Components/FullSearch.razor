@@ -5,10 +5,14 @@
 </div>
 <div class="container">
     <div class="item">
-        <MatTextField @bind-Value="@NameSearchString" OnInput="@(e => NameSearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp" Label="Name"></MatTextField>
+        @*<MatTooltip Tooltip="@BreedList">*@
+            <MatTextField  @bind-Value="@NameSearchString" OnInput="@(e => NameSearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp" Label="Name"></MatTextField>
+
+        @*</MatTooltip>*@
     </div>
     <div class="item">
         <MatTextField @bind-Value="@BreedSearchString" OnInput="@(e => BreedSearchString = e.Value.ToString())" OnKeyUp="@HandleKeyUp" Label="Breed"></MatTextField>
+        @BreedList
     </div>
 </div>
 
