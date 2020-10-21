@@ -1,41 +1,59 @@
 ﻿@page "/contact-us"
 
 
+
 <Animate Animation="Animations.SlideDown" Duration="TimeSpan.FromSeconds(1.5)">
     <h3>Contacts</h3>
 </Animate>
-<Animate Animation="Animations.SlideUp" Duration="TimeSpan.FromSeconds(1)">
-    <div class="contact-container">
 
-        <div class="item">
-            <p>
-                <MatTextField @bind-Value="@Name" OnKeyUp="@OnNameChanged" Label="Name"></MatTextField>
-            </p>
-        </div>
+<div class="contact-container">
 
-        <div class="contact-item">
-            <MatTextField @bind-Value="@EmailAddress" Label="Email Address"></MatTextField>
-
-        </div>
-
+    <Animate Animation="Animations.ZoomInLeft" Duration="TimeSpan.FromSeconds(1.5)">
         <div class="contact-item">
             <p>
-                <MatTextField @bind-Value="@Message" Label="Message" TextArea="true"></MatTextField>
+                <MatTextField @bind-Value="@Name" OnInput="@(e => Name = e.Value.ToString())" OnKeyUp="@OnNameChanged" Label="Name"></MatTextField>
             </p>
         </div>
+    </Animate>
+
+    <Animate Animation="Animations.ZoomInRight" Duration="TimeSpan.FromSeconds(1.5)">
+
+        <div class="contact-item">
+            <MatTextField @bind-Value="@EmailAddress" OnInput="@(e => EmailAddress = e.Value.ToString())" OnKeyUp="@OnNameChanged" Label="Email Address"></MatTextField>
+
+        </div>
+    </Animate>
+    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(1.5)">
+
+        <div class="contact-item">
+            <p>
+                <MatTextField @bind-Value="@Message" OnInput="@(e => Message = e.Value.ToString())" OnKeyUp="@OnNameChanged" Label="Message" TextArea="true"></MatTextField>
+            </p>
+        </div>
+    </Animate>
+    <Animate Animation="Animations.ZoomOut" Duration="TimeSpan.FromSeconds(1.5)">
+
         <div class="itemcontact-">
             <p>
                 <MatButton OnClick="@Submit" Disabled="@(!CanSubmit)">Submit</MatButton>
             </p>
         </div>
+    </Animate>
 
-        <p>@Name</p>
-        <p>@EmailAddress</p>
-        <p>@Message</p>
+    <MatSnackbar @bind-IsOpen="@snackBarIsOpen">
+        <MatSnackbarContent>Thank you @Name, your message was submitted.</MatSnackbarContent>
+        <MatSnackbarActions>
+            <MatButton Raised="true">Retry</MatButton>
+        </MatSnackbarActions>
+    </MatSnackbar>
+
+    <p>@Name</p>
+    <p>@EmailAddress</p>
+    <p>@Message</p>
 
 
-    </div>
-</Animate>
+</div>
+
 
 
 
@@ -66,15 +84,23 @@
 
     public void Submit()
     {
-
+        snackBarIsOpen = true;
+        this.StateHasChanged();
 
     }
 
+    bool snackBarIsOpen = false;
+
+ 
     public async void OnNameChanged(KeyboardEventArgs e)
     {
 
-        if (!string.IsNullOrEmpty(Name))
+        if (!string.IsNullOrEmpty(Name) &&
+            !string.IsNullOrEmpty(EmailAddress) &&
+            !string.IsNullOrEmpty(Message))
             CanSubmit = true;
+        else
+            CanSubmit = false;
 
         await InvokeAsync(() => { StateHasChanged(); });
 
