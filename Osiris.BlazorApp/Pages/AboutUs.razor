@@ -1,12 +1,17 @@
-﻿@page "/about-us"
+﻿@inherits AboutUsBase
+@page "/about-us"
 
 <h3>About Us</h3>
 
-<OsirisBio Name="Osiris Bio"></OsirisBio>
-<OsirisBio Name="Dog API Bio"></OsirisBio>
-<OsirisBio Name="Author Bio"></OsirisBio>
-
-
-@code {
-
+@if (Bios != null)
+{
+    foreach (Bio bio in Bios)
+    {
+        <Animate Animation="Animations.FadeRight" Duration="TimeSpan.FromSeconds(1.5)">
+            <OsirisBio Name="@bio.Name" Picture="@bio.Picture" Description="@bio.Description"></OsirisBio>
+        </Animate>
+    }
 }
+
+
+

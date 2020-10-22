@@ -10,13 +10,17 @@ namespace Osiris.DogApi
 
         public string key { get; set; }
 
-        public int RandomPictureCallageCount { get; set; }
+        public int randomPictureCallageCount { get; set; }
 
         public DogApiUrls urls { get; set; }
 
         public DogApiCacheStrategies cache_stratergies { get; set; }
 
         public CacheWarmers cache_warmers { get; set; }
+
+        public List<Bio> biographies { get; set; }
+
+        public ClientSettings client_settings { get; set; }
     }
 
     public abstract class DogApi<T>
@@ -49,6 +53,14 @@ namespace Osiris.DogApi
         public bool all_breeds { get; set; }
 
         public bool all_images { get; set; }
+
+    }
+
+    public class ClientSettings
+    {
+        public string random_collage_url { get; set; }
+
+        public string bios_url { get; set; }
 
     }
 }

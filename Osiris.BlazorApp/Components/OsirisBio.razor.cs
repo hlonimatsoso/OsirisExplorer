@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Osiris.BlazorApp.Components
 {
-    public class OsirisBioBase:ComponentBase
+    public class OsirisBioBase : ComponentBase
     {
-       [Parameter] public string Name { get; set; }
+        [Parameter] public string Name { get; set; }
+
+        [Parameter] public string Picture { get; set; }
+        
+        [Parameter] public string Description { get; set; }
+
     }
 }

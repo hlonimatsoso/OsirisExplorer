@@ -1,4 +1,39 @@
 ﻿@inherits OsirisBioBase
 
-<h3>Osiris Bio: @Name</h3>
 
+<div class="container">
+    <div class="item">
+        <div class="container">
+
+            <div class="item">
+                <h3>@Name</h3>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="item">
+        <img src="@Picture" />
+    </div>
+    <div class="item">
+        <p>
+            @Description
+        </p>
+    </div>
+</div>
+<style>
+    .container {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+    .item {
+        margin: 15px;
+    }
+
+        .item img {
+            height: 100px;
+        }
+</style>

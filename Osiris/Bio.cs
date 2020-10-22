@@ -5,8 +5,13 @@ using System.Text;
 
 namespace Osiris
 {
-    public class Bio : ComponentBase
+    public class Bio 
     {
-        [Parameter] public string Name { get; set; }
+        public string Name { get; set; }
+
+        public string Picture { get; set; }
+
+        public string Description { get; set; }
+
     }
 }

@@ -23,7 +23,21 @@ namespace Osiris.Api.Controllers
         [HttpGet("RandomPictureCallageCount")]
         public int GetPictureCallageCount()
         {
-            return _settings.Value.RandomPictureCallageCount;
+            return _settings.Value.randomPictureCallageCount;
         }
+
+        [HttpGet("Bios")]
+        public Task<List<Bio>> GetBios()
+        {
+            return Task.FromResult<List<Bio>>(_settings.Value.biographies.ToList());
+        }
+
+        [HttpGet("clientSettings")]
+        public Task<ClientSettings> GetClientSettings()
+        {
+            return Task.FromResult<ClientSettings>(_settings.Value.client_settings);
+        }
+
+        
     }
 }
